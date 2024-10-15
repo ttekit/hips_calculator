@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate your ideality</title>
+</head>
+<body>
+<h1>Input your stats:</h1>
+<p>This is web sita for calculation your hips ideality. All you need to do is input parameters:</p>
+<p>If you want to know how I've done math here - I used golden sections idia to find math formula.</p>
+<input id="a" placeholder="Hip circumference">
+<input id="b" placeholder="Knee length">
+<input id="c" placeholder="Leg length">
+<button id="calcButton">pray to god that I am ok</button>
+<label id="result"></label>
+<script>
+    let button = document.getElementById("calcButton")
+ 
+    button.addEventListener("click", () => {
+        let T0 = document.getElementById("a").value
+        let t1 = document.getElementById("b").value
+        let l = document.getElementById("c").value
+        let kx = (t1 - T0) / l;
+        if (kx < 0) kx = !kx;
+
+        let data = calculateI(T0, t1, kx, l);
+        console.log(data);
+        if (data > 100) data = 100;
+        if (data < 0) data = 0;
+        document.getElementById("result").innerHTML = data;
+    })
+
+    function calculateI(T0, l, kx, L) {
+        const numerator = T0 * l + (kx * Math.pow(L, 2) / 2);
+        const denominator = kx * (L / 2);
+        const result = (numerator / denominator) * 0.234;
+        return result;
+    }
+</script>
+</body>
+</html>
