@@ -7,10 +7,10 @@
 <body>
 <h1>Input your stats:</h1>
 <p>This is web sita for calculation your hips ideality. All you need to do is input parameters:</p>
-<p>If you want to know how I've done math here - I used golden sections idia to find math formula.</p>
-<input id="a" placeholder="Hip circumference">
-<input id="b" placeholder="Knee length">
-<input id="c" placeholder="Leg length">
+<p>If you want to know how I've done math here - I used russian video find math formula so here is a link if your smart enough. https://www.youtube.com/watch?v=LVOJDkmPmHw</p>
+<input id="a" placeholder="Обхват бедра">
+<input id="b" placeholder="Длинна колена">
+<input id="c" placeholder="Длина ноги">
 <button id="calcButton">pray to god that I am ok</button>
 <label id="result"></label>
 <script>
@@ -20,21 +20,27 @@
         let T0 = document.getElementById("a").value
         let t1 = document.getElementById("b").value
         let l = document.getElementById("c").value
-        let kx = (t1 - T0) / l;
-        if (kx < 0) kx = !kx;
 
-        let data = calculateI(T0, t1, kx, l);
+
+        let data = calculateI(T0, t1, l);
         console.log(data);
         if (data > 100) data = 100;
         if (data < 0) data = 0;
         document.getElementById("result").innerHTML = data;
     })
 
-    function calculateI(T0, l, kx, L) {
-        const numerator = T0 * l + (kx * Math.pow(L, 2) / 2);
-        const denominator = kx * (L / 2);
-        const result = (numerator / denominator) * 0.234;
-        return result;
+    function calculateI(T0, t1, L) {
+        let kx = Math.abs((t1 - T0) / t1);
+        console.log(kx);
+        
+        const numerator = (T0 * L) + ((kx * Math.pow(L, 2)) / 2);
+        const denominator = (kx * L) / 2;
+        console.log(kx);
+        console.log(L);
+        console.log(denominator);
+        const I = (numerator / denominator) * 0.234;
+
+        return Math.floor(I);
     }
 </script>
 </body>
